@@ -15,7 +15,7 @@ module.exports = {
         });
 
         newItem.save()
-            .then(item => res.json(item))
+            .then(item => res.json(item)) // item = res.data from client>itemAction>addItem payload
             .catch(err => res.status(404).json({ success: false }));
     },
 

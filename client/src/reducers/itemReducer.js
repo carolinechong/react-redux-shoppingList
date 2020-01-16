@@ -1,31 +1,34 @@
 import uuid from 'uuid';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
-    items: [
-        { id: uuid(), name: 'Eggs' }, //temporary static state within component before redux
-        { id: uuid(), name: 'Milk' },
-        { id: uuid(), name: 'Steak' },
-        { id: uuid(), name: 'Water' },
-    ]
+    items: [],
+    loading: false
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_ITEMS:
             return {
-                ...state //curent state
-            };
-        case DELETE_ITEM:
-            return {
-                ...state,
-                items: state.items.filter(item => item.id !== action.payload)
+                ...state, //current or initial state
+                items: action.payload,
+                loading: false
             };
         case ADD_ITEM:
             return {
                 ...state,
                 items: [action.payload, ...state.items]
             };
+        case DELETE_ITEM:
+            return {
+                ...state,
+                items: state.items.filter(item => item._id !== action.payload)
+            };
+        case ITEMS_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         default:
             return state;
     }

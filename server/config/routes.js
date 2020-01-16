@@ -3,7 +3,7 @@ var items = require('./../controllers/items.js');
 
 module.exports = function (app) {
 
-    app.get('/', items.index);
+    app.get('/items', items.index);
     app.post('/items', items.create);
     app.get('/items/:id', items.specific);
     app.put('/items/:id', items.update);
